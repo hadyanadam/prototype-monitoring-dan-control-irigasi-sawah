@@ -1,0 +1,67 @@
+
+{% for sawah in list_sawah %}
+    <div class="card w-100">
+    <div class="card-header bg-warning">
+        Water Flow {{ sawah.name }}
+    </div>
+    <div class="card-body">
+        <div>
+            <div class="display-1 text-center" id="waterFlowData{{sawah.id}}">
+                0
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="card w-100">
+        <div class="card-header bg-primary">
+            Water Level {{ sawah.name }}
+        </div>
+        <div class="card-body">
+            <div>
+                <canvas id="waterLevelChart{{sawah.id}}"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function createWaterLevelChart{{sawah.id}}() {
+        const labels = [
+            'data',
+        ];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'data',
+                    backgroundColor: 'rgb(0, 0, 200)',
+                    borderColor: 'rgb(0, 0, 200)',
+                data: [0],
+            }]
+        };
+        const config = {
+            type: 'bar',
+            data,
+            options: {
+                legend: {
+                    display: false
+                },
+                scale: {
+                    y : {
+                        max : 10,
+                        min : 0
+                    },
+                    ticks: {
+                        display: false,
+                        maxTicksLimit: 3
+                    }
+                }
+            }
+        };
+        let waterLevelChart = new Chart(
+            document.getElementById('waterLevelChart{{sawah.id}}'),
+            config
+            );
+            return waterLevelChart
+        }
+    </script>
+{% endfor %}

@@ -1,1 +1,4 @@
 __pypackages__
+.vscode
+__pycache__
+.pytest_cache

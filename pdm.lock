@@ -1,4 +1,10 @@
 [[package]]
+name = "aiofiles"
+sections = ["default"]
+version = "0.7.0"
+summary = "File support for asyncio."
+
+[[package]]
 name = "alembic"
 sections = ["default"]
 version = "1.6.5"
@@ -60,7 +66,7 @@ dependencies = [
 name = "colorama"
 sections = ["default"]
 version = "0.4.4"
-marker = "platform_system == 'Windows' or sys_platform == 'win32'"
+marker = "sys_platform == 'win32' or platform_system == 'Windows'"
 summary = "Cross-platform colored terminal text."
 
 [[package]]
@@ -124,6 +130,15 @@ name = "iniconfig"
 sections = ["default"]
 version = "1.1.1"
 summary = "iniconfig: brain-dead simple config-ini parsing"
+
+[[package]]
+name = "jinja2"
+sections = ["default"]
+version = "3.0.1"
+summary = "A very fast and expressive template engine."
+dependencies = [
+    "MarkupSafe>=2.0",
+]
 
 [[package]]
 name = "Mako"
@@ -274,9 +289,13 @@ dependencies = [
 
 [metadata]
 lock_version = "2"
-content_hash = "sha256:d63576be82e747c20db34cbb14614c81d50ccd63d949f8bcd3c5ef3919e2a08c"
+content_hash = "sha256:d3abac3921947c02e2cd57359c450c6117b33c2ff308d41244fa3a44d9510ab4"
 
 [metadata.files]
+"aiofiles 0.7.0" = [
+    {file = "aiofiles-0.7.0-py3-none-any.whl", hash = "sha256:c67a6823b5f23fcab0a2595a289cec7d8c863ffcb4322fb8cd6b90400aedfdbc"},
+    {file = "aiofiles-0.7.0.tar.gz", hash = "sha256:a1c4fc9b2ff81568c83e21392a82f344ea9d23da906e4f6a52662764545e19d4"},
+]
 "alembic 1.6.5" = [
     {file = "alembic-1.6.5-py2.py3-none-any.whl", hash = "sha256:e78be5b919f5bb184e3e0e2dd1ca986f2362e29a2bc933c446fe89f39dbe4e9c"},
     {file = "alembic-1.6.5.tar.gz", hash = "sha256:a21fedebb3fb8f6bbbba51a11114f08c78709377051384c9c5ead5705ee93a51"},
@@ -353,6 +372,10 @@ content_hash = "sha256:d63576be82e747c20db34cbb14614c81d50ccd63d949f8bcd3c5ef391
 "iniconfig 1.1.1" = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
+]
+"jinja2 3.0.1" = [
+    {file = "Jinja2-3.0.1-py3-none-any.whl", hash = "sha256:1f06f2da51e7b56b8f238affdd6b4e2c61e39598a378cc49345bc1bd42a978a4"},
+    {file = "Jinja2-3.0.1.tar.gz", hash = "sha256:703f484b47a6af502e743c9122595cc812b0271f661722403114f71a79d0f5a4"},
 ]
 "mako 1.1.4" = [
     {file = "Mako-1.1.4-py2.py3-none-any.whl", hash = "sha256:aea166356da44b9b830c8023cd9b557fa856bd8b4035d6de771ca027dfc5cc6e"},
