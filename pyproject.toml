@@ -1,0 +1,29 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "hadyanadam", email = "hadyanadamn@gmail.com"},
+]
+dependencies = [
+    "gino[pg,starlette]~=1.0",
+    "fastapi~=0.65",
+    "uvicorn~=0.14",
+    "psycopg2~=2.9",
+    "alembic~=1.6",
+    "pytest~=6.2",
+    "requests~=2.25",
+]
+requires-python = ">=3.8"
+dynamic = ["classifiers"]
+license = {text = "MIT"}
+
+[project.urls]
+homepage = ""
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
