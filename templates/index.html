@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
 </head>
 <body onload="initChart()">
     <main>
@@ -24,13 +25,15 @@
           </div>
           <h2 class="mt-3">Control</h2>
           <div class="d-flex justify-between mt-3">
-            <div class="btn btn-primary">BUKA PINTU</div>
+            <div class="btn btn-primary btn-circle btn-xl" id="btn-sawah1" onclick="">BUKA PINTU Sawah 1</div>
+            <div class="btn btn-primary btn-circle btn-xl" id="btn-sawah2" onclick="">BUKA PINTU Sawah 2</div>
           </div>
         </div>
     </main>
     <script src="{{ url_for('static', path='/js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static', path='/js/chartjs.js') }}"></script>
     <script>
+
       function Add(chart, data) {
         console.log(chart)
         chart.data.datasets.forEach((dataset) => {
@@ -51,6 +54,26 @@
         let wl2 = createWaterLevelChart2()
         let wf1 = document.getElementById('waterFlowData1')
         let wf2 = document.getElementById('waterFlowData2')
+
+        let btnSawah1 = document.getElementById('btn-sawah1')
+        let btnSawah2 = document.getElementById('btn-sawah2')
+
+        btnSawah1.addEventListener('click', (e) => {
+          if (e.target.innerText === "BUKA PINTU Sawah 1") {
+            e.target.innerText = "TUTUP SAWAH 1"
+          }
+          else if (e.target.innerText === "TUTUP SAWAH 1") {
+            e.target.innerText = "BUKA PINTU Sawah 1"
+          }
+        })
+        btnSawah2.addEventListener('click', (e) => {
+          if (e.target.innerText === "BUKA PINTU Sawah 2") {
+            e.target.innerText = "TUTUP SAWAH 2"
+          }
+          else if (e.target.innerText === "TUTUP SAWAH 2") {
+            e.target.innerText = "BUKA PINTU Sawah 2"
+          }
+        })
 
         setInterval(() => {
           fetch('/api/sensor')
