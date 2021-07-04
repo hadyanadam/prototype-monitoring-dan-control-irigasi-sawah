@@ -25,8 +25,8 @@
           </div>
           <h2 class="mt-3">Control</h2>
           <div class="d-flex justify-between mt-3">
-            <div class="btn btn-primary btn-circle btn-xl" id="btn-sawah1" onclick="">BUKA PINTU Sawah 1</div>
-            <div class="btn btn-primary btn-circle btn-xl" id="btn-sawah2" onclick="">BUKA PINTU Sawah 2</div>
+            <div class="btn btn-primary btn-circle btn-xl" id="btn-sawah1">BUKA Sawah 1</div>
+            <div class="btn btn-primary btn-circle btn-xl" id="btn-sawah2">BUKA Sawah 2</div>
           </div>
         </div>
     </main>
@@ -59,19 +59,27 @@
         let btnSawah2 = document.getElementById('btn-sawah2')
 
         btnSawah1.addEventListener('click', (e) => {
-          if (e.target.innerText === "BUKA PINTU Sawah 1") {
+          if (e.target.innerText === "BUKA Sawah 1") {
             e.target.innerText = "TUTUP SAWAH 1"
+            e.target.classList.toggle('btn-primary')
+            e.target.classList.toggle('btn-danger')
           }
           else if (e.target.innerText === "TUTUP SAWAH 1") {
-            e.target.innerText = "BUKA PINTU Sawah 1"
+            e.target.innerText = "BUKA Sawah 1"
+            e.target.classList.toggle('btn-primary')
+            e.target.classList.toggle('btn-danger')
           }
         })
         btnSawah2.addEventListener('click', (e) => {
-          if (e.target.innerText === "BUKA PINTU Sawah 2") {
+          if (e.target.innerText === "BUKA Sawah 2") {
             e.target.innerText = "TUTUP SAWAH 2"
+            e.target.classList.toggle('btn-primary')
+            e.target.classList.toggle('btn-danger')
           }
           else if (e.target.innerText === "TUTUP SAWAH 2") {
-            e.target.innerText = "BUKA PINTU Sawah 2"
+            e.target.innerText = "BUKA Sawah 2"
+            e.target.classList.toggle('btn-primary')
+            e.target.classList.toggle('btn-danger')
           }
         })
 

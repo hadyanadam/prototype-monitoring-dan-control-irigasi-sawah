@@ -9,6 +9,10 @@ router = APIRouter()
 
 templates = Jinja2Templates("templates")
 
+data = {
+    "flow": 0,
+    "level": 0
+}
 
 @router.get("/")
 async def index(context: dict = Depends(Ctrl.index)):
@@ -17,12 +21,10 @@ async def index(context: dict = Depends(Ctrl.index)):
 
 @router.post('/api/sensor', response_model=SensorData, status_code=status.HTTP_201_CREATED)
 async def create_sensor_data(sensor: SensorData):
-    return sensor
+    data.update({'flow': sensor.flow, 'level': sensor.level})
+    return data
 
 
 @router.get('/api/sensor', response_model=SensorData)
 async def get_sensor_data():
-    return {
-        "flow": 4.0,
-        "level": 1.0,
-    }
+    return data
