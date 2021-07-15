@@ -2,8 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi import status
 from fastapi.templating import Jinja2Templates
 from .controllers import Controllers as Ctrl
-from .schemas import SensorData
-
+from .schemas import RelayData, SensorData
 
 router = APIRouter()
 
@@ -15,7 +14,12 @@ def save_data(data: dict):
         file.write(f"{data['flow1']},{data['flow2']},{data['level1']},{data['level2']}")
 
 
-def get_data() -> list:
+def save_relay_data(id: int, val: bool):
+    with open(f"app/relay{id}.txt", "w") as file:
+        file.write(f"{int(val)}")
+
+
+def get_data() -> dict:
     with open("app/data.csv", "r") as file:
         data = file.read().split(",")
 
@@ -33,10 +37,24 @@ async def index(context: dict = Depends(Ctrl.index)):
 )
 async def create_sensor_data(sensor: SensorData):
     data = save_data(sensor.dict())
-    return data
+    return sensor.dict()
 
 
 @router.get("/api/sensor", response_model=SensorData)
 async def get_sensor_data():
     data = get_data()
     return data
+
+
+@router.get("/api/relay/{id}", response_model=RelayData)
+async def get_relay_data(id: int):
+    file = open(f"app/relay{id}.txt", "r")
+    data = file.read()
+    file.close()
+    return {"val": data}
+
+
+@router.post("/api/relay/{id}", response_model=RelayData)
+async def update_relay_data(id: int, relay: RelayData):
+    data = save_relay_data(id, relay.val)
+    return relay.dict()

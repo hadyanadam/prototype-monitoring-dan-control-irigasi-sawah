@@ -6,3 +6,7 @@ class SensorData(BaseModel):
     level1: float
     flow2: float
     level2: float
+
+
+class RelayData(BaseModel):
+    val: bool
