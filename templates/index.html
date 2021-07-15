@@ -87,10 +87,10 @@
           fetch('/api/sensor')
             .then(response => response.json())
             .then(commits => {
-              UpdateLevel(wf1, commits.flow)
-              UpdateLevel(wf2, commits.flow)
-              Add(wl1, commits.level)
-              Add(wl2, commits.level)
+              UpdateLevel(wf1, commits.flow1)
+              UpdateLevel(wf2, commits.flow2)
+              Add(wl1, commits.level1)
+              Add(wl2, commits.level2)
             })
         }, 5000)
       }

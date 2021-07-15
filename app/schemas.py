@@ -2,5 +2,7 @@ from pydantic import BaseModel
 
 
 class SensorData(BaseModel):
-    flow: float
-    level: float
+    flow1: float
+    level1: float
+    flow2: float
+    level2: float
