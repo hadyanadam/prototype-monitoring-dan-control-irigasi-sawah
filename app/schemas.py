@@ -10,3 +10,8 @@ class SensorData(BaseModel):
 
 class RelayData(BaseModel):
     val: bool
+
+
+class RelayAllData(BaseModel):
+    relay1: bool
+    relay2: bool

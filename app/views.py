@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi import status
 from fastapi.templating import Jinja2Templates
 from .controllers import Controllers as Ctrl
-from .schemas import RelayData, SensorData
+from .schemas import RelayAllData, RelayData, SensorData
 
 router = APIRouter()
 
@@ -53,6 +53,15 @@ async def get_relay_data(id: int):
     file.close()
     return {"val": data}
 
+@router.get("/api/relay", response_model=RelayAllData)
+async def get_relay_all():
+    file = open("app/relay1.txt", "r")
+    data = file.read()
+    file.close()
+    file1 = open("app/relay2.txt", "r")
+    data1 = file1.read()
+    file1.close()
+    return {"relay1": data, "relay2": data1}
 
 @router.post("/api/relay/{id}", response_model=RelayData)
 async def update_relay_data(id: int, relay: RelayData):
