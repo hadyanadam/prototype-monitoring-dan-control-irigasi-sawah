@@ -13,5 +13,5 @@ class RelayData(BaseModel):
 
 
 class RelayAllData(BaseModel):
-    relay1: bool
-    relay2: bool
+    relay1: int
+    relay2: int
