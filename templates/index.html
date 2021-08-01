@@ -13,9 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Sistem Monitoring dan Control Pintu Irigasi Sawah</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <div class="h3 text-white" id="jam"></div>
         </div>
       </nav>
         <div class="container-fluid">
@@ -137,6 +135,12 @@
               Add(wl2, commits.level2)
             })
         }, 5000)
+
+        setInterval(() => {
+          let jam = document.getElementById("jam")
+          let currentDate = new Date()
+          jam.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+        }, 1000)
       }
     </script>
 </body>
