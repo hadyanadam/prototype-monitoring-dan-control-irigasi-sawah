@@ -139,7 +139,8 @@
         setInterval(() => {
           let jam = document.getElementById("jam")
           let currentDate = new Date()
-          jam.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+          let second = currentDate.getSeconds() < 9 ? "0" + currentDate.getSeconds() : currentDate.getSeconds()
+          jam.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + second
         }, 1000)
       }
     </script>
