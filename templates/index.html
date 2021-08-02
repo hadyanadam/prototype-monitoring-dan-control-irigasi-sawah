@@ -134,9 +134,13 @@
             .then(response => response.json())
             .then(commits => {
               if(!localStorage.getItem('r1')){
+                UpdateLevel(wf1, 0, "r1")
+              } else {
                 UpdateLevel(wf1, commits.flow1, "r1")
               }
               if(!localStorage.getItem('r2')){
+                UpdateLevel(wf2, 0, "r2")
+              } else{
                 UpdateLevel(wf2, commits.flow2, "r2")
               }
               Add(wl1, commits.level1)
