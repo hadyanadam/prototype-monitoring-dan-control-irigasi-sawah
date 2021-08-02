@@ -31,10 +31,6 @@
     <script src="{{ url_for('static', path='/js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static', path='/js/chartjs.js') }}"></script>
     <script>
-      let statusRelay = {
-        r1: false,
-        r2: false
-      }
 
       function Add(chart, data) {
         chart.data.datasets.forEach((dataset) => {
@@ -47,7 +43,7 @@
       }
 
       function UpdateLevel(element, data, relay) {
-        if(!statusRelay[relay]){
+        if(!localStorage.getItem(relay)){
           element.innerText = "0 mL/s"
         } else{
           element.innerText = `${data} mL/s`
@@ -66,7 +62,7 @@
         btnSawah1.addEventListener('click', (e) => {
           if (e.target.innerText === "BUKA Sawah 1") {
             e.target.innerText = "TUTUP SAWAH 1"
-            statusRelay.r1 = true
+            localStorage.setItem("r1", true)
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
             fetch('/api/relay/1', {
@@ -82,7 +78,7 @@
               .then(commit => console.log(commit))
           }
           else if (e.target.innerText === "TUTUP SAWAH 1") {
-            statusRelay.r1 = false
+            localStorage.setItem("r1", false)
             e.target.innerText = "BUKA Sawah 1"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
@@ -101,7 +97,7 @@
         })
         btnSawah2.addEventListener('click', (e) => {
           if (e.target.innerText === "BUKA Sawah 2") {
-            statusRelay.r2 = true
+            localStorage.setItem("r2", true)
             e.target.innerText = "TUTUP SAWAH 2"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
@@ -118,7 +114,7 @@
               .then(commit => console.log(commit))
           }
           else if (e.target.innerText === "TUTUP SAWAH 2") {
-            statusRelay.r2 = false
+            localStorage.setItem("r2", false)
             e.target.innerText = "BUKA Sawah 2"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
@@ -140,8 +136,8 @@
           fetch('/api/sensor')
             .then(response => response.json())
             .then(commits => {
-              UpdateLevel(wf1, commits.flow1)
-              UpdateLevel(wf2, commits.flow2)
+              UpdateLevel(wf1, commits.flow1, "r1")
+              UpdateLevel(wf2, commits.flow2, "r2")
               Add(wl1, commits.level1)
               Add(wl2, commits.level2)
             })
