@@ -42,9 +42,12 @@
         chart.update();
       }
 
-      function UpdateLevel(element, data, relay) {
-        element.innerText = "0 mL/s"
-        element.innerText = `${data} mL/s`
+      function UpdateLevel(element, data, btn) {
+        if(btn.classList[5] === "tutup"){
+          element.innerText = "0 mL/s"
+        } else {
+          element.innerText = `${data} mL/s`
+        }
       }
 
       function initChart() {
@@ -59,10 +62,9 @@
         btnSawah1.addEventListener('click', (e) => {
           if (e.target.innerText === "BUKA Sawah 1") {
             e.target.innerText = "TUTUP SAWAH 1"
-            localStorage.setItem("r1", true)
-            console.log(localStorage.getItem('r1'))
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
+            e.target.classList.toggle('buka')
             fetch('/api/relay/1', {
               method: "POST",
               body: JSON.stringify({
@@ -76,10 +78,10 @@
               .then(commit => console.log(commit))
           }
           else if (e.target.innerText === "TUTUP SAWAH 1") {
-            localStorage.setItem("r1", false)
             e.target.innerText = "BUKA Sawah 1"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
+            e.target.classList.toggle('tutup')
             fetch('/api/relay/1', {
               method: "POST",
               body: JSON.stringify({
@@ -95,10 +97,10 @@
         })
         btnSawah2.addEventListener('click', (e) => {
           if (e.target.innerText === "BUKA Sawah 2") {
-            localStorage.setItem("r2", true)
             e.target.innerText = "TUTUP SAWAH 2"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
+            e.target.classList.toggle('buka')
             fetch('/api/relay/2', {
               method: "POST",
               body: JSON.stringify({
@@ -112,10 +114,10 @@
               .then(commit => console.log(commit))
           }
           else if (e.target.innerText === "TUTUP SAWAH 2") {
-            localStorage.setItem("r2", false)
             e.target.innerText = "BUKA Sawah 2"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
+            e.target.classList.toggle('tutup')
             fetch('/api/relay/2', {
               method: "POST",
               body: JSON.stringify({
@@ -134,16 +136,8 @@
           fetch('/api/sensor')
             .then(response => response.json())
             .then(commits => {
-              if(!localStorage.getItem('r1')){
-                UpdateLevel(wf1, 0, "r1")
-              } else {
-                UpdateLevel(wf1, commits.flow1, "r1")
-              }
-              if(!localStorage.getItem('r2')){
-                UpdateLevel(wf2, 0, "r2")
-              } else{
-                UpdateLevel(wf2, commits.flow2, "r2")
-              }
+              UpdateLevel(wf1, commits.flow1, btnSawah1)
+              UpdateLevel(wf2, commits.flow2, btnSawah2)
               Add(wl1, commits.level1)
               Add(wl2, commits.level2)
             })
