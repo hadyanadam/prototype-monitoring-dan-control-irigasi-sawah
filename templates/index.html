@@ -43,7 +43,9 @@
       }
 
       function UpdateLevel(element, data, relay) {
-        if(!localStorage.getItem(relay)){
+        let data = localStorage.getItem(relay)
+        console.log(data)
+        if(!data){
           element.innerText = "0 mL/s"
         } else{
           element.innerText = `${data} mL/s`
