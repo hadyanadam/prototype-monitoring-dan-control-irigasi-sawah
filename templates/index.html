@@ -60,6 +60,7 @@
           if (e.target.innerText === "BUKA Sawah 1") {
             e.target.innerText = "TUTUP SAWAH 1"
             localStorage.setItem("r1", true)
+            console.log(localStorage.getItem('r1'))
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
             fetch('/api/relay/1', {
