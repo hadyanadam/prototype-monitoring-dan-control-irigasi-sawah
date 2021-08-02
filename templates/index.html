@@ -31,9 +31,12 @@
     <script src="{{ url_for('static', path='/js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static', path='/js/chartjs.js') }}"></script>
     <script>
+      let statusRelay = {
+        r1: false,
+        r2: false
+      }
 
       function Add(chart, data) {
-        console.log(chart)
         chart.data.datasets.forEach((dataset) => {
             dataset.data.pop();
         });
@@ -43,8 +46,12 @@
         chart.update();
       }
 
-      function UpdateLevel(element, data) {
-        element.innerText = `${data} mL`
+      function UpdateLevel(element, data, relay) {
+        if(!statusRelay[relay]){
+          element.innerText = "0 mL/s"
+        } else{
+          element.innerText = `${data} mL/s`
+        }
       }
 
       function initChart() {
@@ -59,6 +66,7 @@
         btnSawah1.addEventListener('click', (e) => {
           if (e.target.innerText === "BUKA Sawah 1") {
             e.target.innerText = "TUTUP SAWAH 1"
+            statusRelay.r1 = true
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
             fetch('/api/relay/1', {
@@ -74,6 +82,7 @@
               .then(commit => console.log(commit))
           }
           else if (e.target.innerText === "TUTUP SAWAH 1") {
+            statusRelay.r1 = false
             e.target.innerText = "BUKA Sawah 1"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
@@ -92,6 +101,7 @@
         })
         btnSawah2.addEventListener('click', (e) => {
           if (e.target.innerText === "BUKA Sawah 2") {
+            statusRelay.r2 = true
             e.target.innerText = "TUTUP SAWAH 2"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
@@ -108,6 +118,7 @@
               .then(commit => console.log(commit))
           }
           else if (e.target.innerText === "TUTUP SAWAH 2") {
+            statusRelay.r2 = false
             e.target.innerText = "BUKA Sawah 2"
             e.target.classList.toggle('btn-primary')
             e.target.classList.toggle('btn-danger')
@@ -140,7 +151,8 @@
           let jam = document.getElementById("jam")
           let currentDate = new Date()
           let second = currentDate.getSeconds() < 9 ? "0" + currentDate.getSeconds() : currentDate.getSeconds()
-          jam.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + second
+          let minute = currentDate.getMinutes() < 9 ? "0" + currentDate.getMinutes() : currentDate.getMinutes()
+          jam.innerHTML = currentDate.getHours() + ":" + minute + ":" + second
         }, 1000)
       }
     </script>
