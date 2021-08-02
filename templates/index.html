@@ -44,7 +44,6 @@
 
       function UpdateLevel(element, data, relay) {
         let data = localStorage.getItem(relay)
-        console.log(data)
         if(!data){
           element.innerText = "0 mL/s"
         } else{
@@ -138,7 +137,6 @@
           fetch('/api/sensor')
             .then(response => response.json())
             .then(commits => {
-              console.log(commits)
               UpdateLevel(wf1, commits.flow1, "r1")
               UpdateLevel(wf2, commits.flow2, "r2")
               Add(wl1, commits.level1)
