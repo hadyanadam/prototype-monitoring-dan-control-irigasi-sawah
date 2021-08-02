@@ -43,12 +43,8 @@
       }
 
       function UpdateLevel(element, data, relay) {
-        let relayState = localStorage.getItem(relay)
-        if(!relayState){
-          element.innerText = "0 mL/s"
-        } else{
-          element.innerText = `${data} mL/s`
-        }
+        element.innerText = "0 mL/s"
+        element.innerText = `${data} mL/s`
       }
 
       function initChart() {
@@ -137,8 +133,12 @@
           fetch('/api/sensor')
             .then(response => response.json())
             .then(commits => {
-              UpdateLevel(wf1, commits.flow1, "r1")
-              UpdateLevel(wf2, commits.flow2, "r2")
+              if(!localStorage.getItem('r1')){
+                UpdateLevel(wf1, commits.flow1, "r1")
+              }
+              if(!localStorage.getItem('r2')){
+                UpdateLevel(wf2, commits.flow2, "r2")
+              }
               Add(wl1, commits.level1)
               Add(wl2, commits.level2)
             })
